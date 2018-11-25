@@ -27,8 +27,8 @@ var (
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "iotc [command] [flags]",
-	Short: "Command-line interface for IoTeX blockchain",
-	Long: `iotc is a command-line interface which queries the IoTeX blockchain and can return a variety 
+	Short: "Command-line interface for blockchain",
+	Long: `iotc is a command-line interface which queries the blockchain and can return a variety
 of useful information about the state of the blockchain or given account.`,
 }
 

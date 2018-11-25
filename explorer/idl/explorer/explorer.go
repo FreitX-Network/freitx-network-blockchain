@@ -3,8 +3,9 @@ package explorer
 
 import (
 	"fmt"
-	"github.com/coopernurse/barrister-go"
 	"reflect"
+
+	"github.com/coopernurse/barrister-go"
 )
 
 const BarristerVersion string = "0.1.6"
@@ -2970,7 +2971,7 @@ var IdlJsonRaw = `[
             },
             {
                 "name": "getAddressDetails",
-                "comment": "get the address detail of an iotex address",
+                "comment": "get the address detail of an onex address",
                 "params": [
                     {
                         "name": "address",

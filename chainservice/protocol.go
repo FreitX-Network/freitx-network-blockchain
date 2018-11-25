@@ -11,7 +11,7 @@ import (
 	"github.com/freitx-project/freitx-network-blockchain/state"
 )
 
-// Protocol defines the protocol interfaces atop IoTeX blockchain
+// Protocol defines the protocol interfaces atop blockchain
 type Protocol interface {
 	actpool.ActionValidator
 	state.ActionHandler

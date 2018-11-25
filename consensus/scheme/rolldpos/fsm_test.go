@@ -24,8 +24,8 @@ import (
 	"github.com/freitx-project/freitx-network-blockchain/config"
 	"github.com/freitx-project/freitx-network-blockchain/crypto"
 	"github.com/freitx-project/freitx-network-blockchain/endorsement"
-	"github.com/freitx-project/freitx-network-blockchain/onexaddress"
 	"github.com/freitx-project/freitx-network-blockchain/logger"
+	"github.com/freitx-project/freitx-network-blockchain/onexaddress"
 	"github.com/freitx-project/freitx-network-blockchain/pkg/hash"
 	"github.com/freitx-project/freitx-network-blockchain/pkg/keypair"
 	"github.com/freitx-project/freitx-network-blockchain/state"
@@ -1332,7 +1332,7 @@ func newTestCFSM(
 func newTestAddr() *OnexAddress.Address {
 	pk, sk, err := crypto.EC283.NewKeyPair()
 	if err != nil {
-		logger.Panic().Err(err).Msg("error when creating test IoTeX address")
+		logger.Panic().Err(err).Msg("error when creating test OneX address")
 	}
 	pkHash := keypair.HashPubKey(pk)
 	addr := address.New(config.Default.Chain.ID, pkHash[:])

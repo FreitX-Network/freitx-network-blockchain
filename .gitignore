@@ -1,33 +1,37 @@
-blockchain.*
+.idea
+*.iml
 *.db
-dapps/
-chains/
-.DS_Store
-.ed25519-node
-.idea/
-*.log
-__MACOSX/
-nodejs/
-node_modules
-.project
-release
-sqlite/
-ssl/
-stacktrace*
-tmp
-build
-*.pid
-package-lock.json
-.vs/
-.vscode
-public/*
-public/dist/*
-!public/dist/.gitkeep
-!public/dist/chains/
-public/dist/chains/*
-!public/dist/chains/.gitkeep
-*.save
-data/*
-!data/.gitkeep
-.nyc_output
-coverage
+
+.cache
+
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# profiling output
+*prof*
+
+# Binaries for programs and plugins
+*.exe
+*.dll
+*.dylib
+*.pyc
+
+# Test binary, build with `go test -c`
+*.test
+
+#git patch
+*.patch
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Golang dependencies
+
+# wallet date file
+*.dat
+
+# binary
+bin/*
+coverage.html
+lint.log

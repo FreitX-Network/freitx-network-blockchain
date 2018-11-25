@@ -20,9 +20,9 @@ import (
 	"github.com/freitx-project/freitx-network-blockchain/consensus/scheme"
 	"github.com/freitx-project/freitx-network-blockchain/consensus/scheme/rolldpos"
 	explorerapi "github.com/freitx-project/freitx-network-blockchain/explorer/idl/explorer"
-	"github.com/freitx-project/freitx-network-blockchain/onexaddress"
 	"github.com/freitx-project/freitx-network-blockchain/logger"
 	"github.com/freitx-project/freitx-network-blockchain/network"
+	"github.com/freitx-project/freitx-network-blockchain/onexaddress"
 	"github.com/freitx-project/freitx-network-blockchain/pkg/keypair"
 	"github.com/freitx-project/freitx-network-blockchain/pkg/lifecycle"
 	"github.com/freitx-project/freitx-network-blockchain/proto"
@@ -138,7 +138,7 @@ func NewConsensus(
 					// address. Instead we should use public key to identify the block producer
 					rootChainAddr, err := address.OnexAddressToAddress(rawc.Address)
 					if err != nil {
-						return nil, errors.Wrapf(err, "error when get converting iotex address to address")
+						return nil, errors.Wrapf(err, "error when get converting address to address")
 					}
 					subChainAddr := address.New(cfg.Chain.ID, rootChainAddr.Payload())
 					pubKey, err := keypair.DecodePublicKey(rawc.PubKey)
@@ -178,7 +178,7 @@ func NewConsensus(
 	default:
 		logger.Error().
 			Str("scheme", cfg.Consensus.Scheme).
-			Msg("Unexpected IotxConsensus scheme")
+			Msg("Unexpected mFBA scheme")
 		return nil
 	}
 
@@ -189,7 +189,7 @@ func NewConsensus(
 func (c *IotxConsensus) Start(ctx context.Context) error {
 	logger.Info().
 		Str("scheme", c.cfg.Scheme).
-		Msg("Starting IotxConsensus scheme")
+		Msg("Starting mFBA scheme")
 
 	err := c.scheme.Start(ctx)
 	if err != nil {
@@ -202,7 +202,7 @@ func (c *IotxConsensus) Start(ctx context.Context) error {
 func (c *IotxConsensus) Stop(ctx context.Context) error {
 	logger.Info().
 		Str("scheme", c.cfg.Scheme).
-		Msg("Stopping IotxConsensus scheme")
+		Msg("Stopping mFBA scheme")
 
 	err := c.scheme.Stop(ctx)
 	if err != nil {
@@ -231,7 +231,7 @@ func (c *IotxConsensus) Scheme() scheme.Scheme {
 	return c.scheme
 }
 
-// GetAddr returns the iotex address
+// GetAddr returns the onex address
 func GetAddr(cfg *config.Config) *OnexAddress.Address {
 	addr, err := cfg.BlockchainAddress()
 	if err != nil {

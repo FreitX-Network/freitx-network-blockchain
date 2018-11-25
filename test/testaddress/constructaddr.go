@@ -8,12 +8,12 @@ package testaddress
 
 import (
 	"github.com/freitx-project/freitx-network-blockchain/address"
-	"github.com/freitx-project/freitx-network-blockchain/onexaddress"
 	"github.com/freitx-project/freitx-network-blockchain/logger"
+	"github.com/freitx-project/freitx-network-blockchain/onexaddress"
 	"github.com/freitx-project/freitx-network-blockchain/pkg/keypair"
 )
 
-// ConstructAddress constructs an iotex address
+// ConstructAddress constructs an address
 func ConstructAddress(chainID uint32, pubkey, prikey string) *OnexAddress.Address {
 	pubk, err := keypair.DecodePublicKey(pubkey)
 	if err != nil {

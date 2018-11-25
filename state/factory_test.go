@@ -256,7 +256,7 @@ func voteForm(height uint64, cs []*Candidate) []string {
 //}
 
 func TestCandidates(t *testing.T) {
-	// Create three dummy iotex addresses
+	// Create three dummy addresses
 	a := testaddress.Addrinfo["alfa"]
 	b := testaddress.Addrinfo["bravo"]
 	c := testaddress.Addrinfo["charlie"]
@@ -795,7 +795,7 @@ func TestCandidatesByHeight(t *testing.T) {
 }
 
 func TestUnvote(t *testing.T) {
-	// Create three dummy iotex addresses
+	// Create three dummy addresses
 	a := testaddress.Addrinfo["alfa"]
 	b := testaddress.Addrinfo["bravo"]
 

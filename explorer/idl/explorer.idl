@@ -311,7 +311,7 @@ interface Explorer {
     // get the balance of an address
     getAddressBalance(address string) string
 
-    // get the address detail of an iotex address
+    // get the address detail of an onex address
     getAddressDetails(address string) AddressDetails
 
     // get list of transfers by start block height, transfer offset and limit

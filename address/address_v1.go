@@ -10,8 +10,8 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/freitx-project/freitx-network-blockchain/address/bech32"
-	"github.com/freitx-project/freitx-network-blockchain/onexaddress"
 	"github.com/freitx-project/freitx-network-blockchain/logger"
+	"github.com/freitx-project/freitx-network-blockchain/onexaddress"
 	"github.com/freitx-project/freitx-network-blockchain/pkg/enc"
 	"github.com/freitx-project/freitx-network-blockchain/pkg/hash"
 )
@@ -97,7 +97,7 @@ func (v *v1) decodeBech32(encodedAddr string) ([]byte, error) {
 	return payload, nil
 }
 
-// AddrV1 is V1 address format to be used on IoTeX blockchain and subchains. It is composed of parts in the
+// AddrV1 is V1 address format to be used on blockchain and subchains. It is composed of parts in the
 // following order:
 // 1. uint32: chain ID
 // 2. 20 bytes: hash derived from the the public key
@@ -140,7 +140,7 @@ func (addr *AddrV1) OnexAddress() string {
 	enc.MachineEndian.PutUint32(chainIDBytes[:], addr.chainID)
 	iotxAddr, err := OnexAddress.GetAddressByHash(isTestNet, chainIDBytes[:], addr.pkHash[:])
 	if err != nil {
-		logger.Error().Err(err).Msg("error when converting address to the iotex address")
+		logger.Error().Err(err).Msg("error when converting address to the onex address")
 		return ""
 	}
 	return iotxAddr.RawAddress

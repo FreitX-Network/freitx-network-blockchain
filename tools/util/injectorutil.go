@@ -20,8 +20,8 @@ import (
 	"github.com/freitx-project/freitx-network-blockchain/action"
 	"github.com/freitx-project/freitx-network-blockchain/blockchain"
 	"github.com/freitx-project/freitx-network-blockchain/explorer/idl/explorer"
-	"github.com/freitx-project/freitx-network-blockchain/onexaddress"
 	"github.com/freitx-project/freitx-network-blockchain/logger"
+	"github.com/freitx-project/freitx-network-blockchain/onexaddress"
 	"github.com/freitx-project/freitx-network-blockchain/test/testaddress"
 )
 
@@ -48,7 +48,7 @@ func LoadAddresses(keypairsPath string, chainID uint32) ([]*OnexAddress.Address,
 		return nil, errors.Wrap(err, "failed to unmarshal key pairs bytes")
 	}
 
-	// Construct iotex addresses from loaded key pairs
+	// Construct onex addresses from loaded key pairs
 	addrs := make([]*OnexAddress.Address, 0)
 	for _, pair := range keypairs.Pairs {
 		addr := testaddress.ConstructAddress(chainID, pair.PK, pair.SK)

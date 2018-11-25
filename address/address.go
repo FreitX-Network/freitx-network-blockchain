@@ -14,7 +14,7 @@ import (
 	"github.com/freitx-project/freitx-network-blockchain/pkg/hash"
 )
 
-// init reads IOTEX_NETWORK_TYPE environment variable. If it exists and the value is equal to "testnet" with case
+// init reads environment variable. If it exists and the value is equal to "testnet" with case
 // ignored,  the global variable isTestNet is set to true for the whole runtime
 func init() {
 	isTestNet = strings.EqualFold(os.Getenv("IOTEX_NETWORK_TYPE"), "testnet")

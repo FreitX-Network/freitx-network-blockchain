@@ -4,7 +4,7 @@
 // permitted by law, all liability for your use of the code is disclaimed. This source code is governed by Apache
 // License 2.0 that can be found in the LICENSE file.
 
-// This is a testing tool to generate iotex addresses
+// This is a testing tool to generate addresses
 // To use, run "make build" and " ./bin/addrgen"
 package main
 

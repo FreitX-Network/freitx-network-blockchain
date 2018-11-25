@@ -30,7 +30,7 @@ import (
 	"github.com/freitx-project/freitx-network-blockchain/pkg/routine"
 )
 
-// Server is the iotex server instance containing all components.
+// Server is the onex server instance containing all components.
 type Server struct {
 	cfg                  *config.Config
 	rootChainService     *chainservice.ChainService
