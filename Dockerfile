@@ -1,0 +1,45 @@
+FROM golang:1.10.2-stretch
+
+RUN apt-get install -y --no-install-recommends make && \
+    mkdir -p $GOPATH/src/github.com/freitx-project/freitx-network-blockchain/
+
+COPY ./ $GOPATH/src/github.com/freitx-project/freitx-network-blockchain/
+
+ARG SKIP_DEP=false
+
+RUN if [ "$SKIP_DEP" != true ] ; \
+    then \
+        cd $GOPATH/src/github.com/freitx-project/freitx-network-blockchain/ && \
+	curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh && \
+        dep ensure --vendor-only; \
+    fi
+
+
+RUN mkdir -p $GOPATH/src/github.com/CoderZhi/go-ethereum/ && \
+    mkdir -p $GOPATH/pkg/linux_amd64/github.com/CoderZhi/ && \
+    rm -rf $GOPATH/src/github.com/freitx-project/freitx-network-blockchain/vendor/github.com/CoderZhi/go-ethereum/ && \
+    cd $GOPATH/src/github.com/freitx-project/freitx-network-blockchain/pkg/ && \
+    tar -xzvf go-ethereum.tar.gz && \
+    cp -r $GOPATH/src/github.com/freitx-project/freitx-network-blockchain/pkg/go-ethereum/binary_linux/* $GOPATH/pkg/linux_amd64/github.com/CoderZhi/ && \
+    cp -r $GOPATH/src/github.com/freitx-project/freitx-network-blockchain/pkg/go-ethereum/go-ethereum/* $GOPATH/src/github.com/CoderZhi/go-ethereum/ && \
+    rm -rf $GOPATH/src/github.com/freitx-project/freitx-network-blockchain/pkg/go-ethereum/ && \
+    cd $GOPATH/src/github.com/freitx-project/freitx-network-blockchain/ && \
+    make clean build && \
+    ln -s $GOPATH/src/github.com/freitx-project/freitx-network-blockchain/bin/server /usr/local/bin/iotex-server  && \
+    ln -s $GOPATH/src/github.com/freitx-project/freitx-network-blockchain/bin/actioninjector /usr/local/bin/iotex-actioninjector && \
+    mkdir -p /usr/local/lib/iotex/ && \
+    ln -s $GOPATH/src/github.com/freitx-project/freitx-network-blockchain/bin/addrgen /usr/local/bin/iotex-addrgen && \
+    mkdir -p /usr/local/lib/iotex/ && \
+    cp $GOPATH/src/github.com/freitx-project/freitx-network-blockchain/crypto/lib/libsect283k1_ubuntu.so /usr/lib/ && \
+    cp $GOPATH/src/github.com/freitx-project/freitx-network-blockchain/crypto/lib/blslib/libtblsmnt_ubuntu.so /usr/lib/ && \
+    mkdir -p /etc/iotex/ && \
+    echo "chain:" >> /etc/iotex/config.yaml && \
+    echo "    producerPrivKey: \"c0c08b8f4887c62a07d07388575e03d650cdcf1cf8050ba09881ea49ecb9746a4854ee01\"" >> /etc/iotex/config.yaml && \
+    echo "    producerPubKey: "5e24c6c19eb50a6da14d0d2841ee8b7f8e31771f31413466526f7a726f70d8a619421f066d2033c413cbaeb710de4056061c1ed728274cfaaa69a91436ec3fe2135d0e40e7fbae03"" >> /etc/iotex/config.yaml && \
+    echo "    genesisActionsPath: /etc/iotex/testnet_actions.yaml" >> /etc/iotex/config.yaml && \
+    echo "network:" >> /etc/iotex/config.yaml && \
+    echo "    bootstrapNodes:" >> /etc/iotex/config.yaml && \
+    echo "        - \"127.0.0.1:4689\"" >> /etc/iotex/config.yaml && \
+    ln -s $GOPATH/src/github.com/freitx-project/freitx-network-blockchain/blockchain/testnet_actions.yaml /etc/iotex/testnet_actions.yaml
+
+CMD [ "iotex-server", "-config-path=/etc/iotex/config.yaml"]
